@@ -10,17 +10,14 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  final Function removeItem;
 
-  MealItem({
-    @required this.id,
-    @required this.title,
-    @required this.imageUrl,
-    @required this.affordability,
-    @required this.complexity,
-    @required this.duration,
-    @required this.removeItem,
-  });
+  MealItem(
+      {@required this.id,
+      @required this.title,
+      @required this.imageUrl,
+      @required this.affordability,
+      @required this.complexity,
+      @required this.duration,});
 
   String get complexityText {
     switch (complexity) {
@@ -60,13 +57,11 @@ class MealItem extends StatelessWidget {
       MealDetailScreen.routeName,
       arguments: id,
     )
-        .then(
-      (result) {
-        if (result != null) {
-          removeItem(result);
-        }
-      },
-    );
+        .then((result) {
+      if (result != null) {
+        // removeItem(result);
+      }
+    });
   }
 
   @override

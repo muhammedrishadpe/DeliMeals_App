@@ -1,14 +1,17 @@
-import '../widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
   static const routeName = '/filters';
+
   final Function saveFilters;
   final Map<String, bool> currentFilters;
+
   FiltersScreen(this.currentFilters, this.saveFilters);
 
   @override
-  State<FiltersScreen> createState() => _FiltersScreenState();
+  _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
@@ -26,8 +29,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
     super.initState();
   }
 
-  Widget _buildSwitchListTitle(String title, String description,
-      bool currentValue, Function updateValue) {
+  Widget _buildSwitchListTile(
+    String title,
+    String description,
+    bool currentValue,
+    Function updateValue,
+  ) {
     return SwitchListTile(
       title: Text(title),
       value: currentValue,
@@ -42,19 +49,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Filters!'),
+        title: Text('Your Filters'),
         actions: <Widget>[
           IconButton(
-              onPressed: () {
-                final selectedFilters = {
-                  'gluten': _glutenFree,
-                  'lactose': _lactoseFree,
-                  'vegetarian': _vegetarian,
-                  'vegan': _vegan,
-                };
-                widget.saveFilters(selectedFilters);
-              },
-              icon: Icon(Icons.save))
+            icon: Icon(Icons.save),
+            onPressed: () {
+              final selectedFilters = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'vegetarian': _vegetarian,
+              };
+              widget.saveFilters(selectedFilters);
+            },
+          )
         ],
       ),
       drawer: MainDrawer(),
@@ -70,9 +78,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
             child: ListView(
               children: <Widget>[
-                _buildSwitchListTitle(
+                _buildSwitchListTile(
                   'Gluten-free',
-                  'Only include gluten-free meals',
+                  'Only include gluten-free meals.',
                   _glutenFree,
                   (newValue) {
                     setState(
@@ -82,9 +90,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     );
                   },
                 ),
-                _buildSwitchListTitle(
+                _buildSwitchListTile(
                   'Lactose-free',
-                  'Only include lactose-free meals',
+                  'Only include lactose-free meals.',
                   _lactoseFree,
                   (newValue) {
                     setState(
@@ -94,9 +102,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     );
                   },
                 ),
-                _buildSwitchListTitle(
+                _buildSwitchListTile(
                   'Vegetarian',
-                  'Only include vegetarian meals',
+                  'Only include vegetarian meals.',
                   _vegetarian,
                   (newValue) {
                     setState(
@@ -106,9 +114,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     );
                   },
                 ),
-                _buildSwitchListTitle(
+                _buildSwitchListTile(
                   'Vegan',
-                  'Only include vegan meals',
+                  'Only include vegan meals.',
                   _vegan,
                   (newValue) {
                     setState(
@@ -117,10 +125,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
                       },
                     );
                   },
-                ),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
